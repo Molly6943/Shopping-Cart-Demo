@@ -1,3 +1,7 @@
+const DELEVERY_FEE_CENTS = 489
+const PLATFORM_FEE_CENTS = 40
+const TAX_RATE = 0.08
+
 async function renderMenu() {
     const menuListElement = document.querySelector('.menu-list')
     const menuList = await getMenu()
@@ -40,9 +44,14 @@ async function renderMenu() {
 }
 
 async function renderShoppingCart () {
+
   const cartListElement = document.querySelector('.cart-list')
   cartListElement.innerHTML = ""
   const cartList = await getShoppingCartList()
+  const subTotalCents = cartList.map(x => x.priceCents*x.quantity).reduce((total, currentValue) => total += currentValue)
+  const taxCents = subTotalCents * TAX_RATE
+  const totalCents = subTotalCents + DELEVERY_FEE_CENTS + PLATFORM_FEE_CENTS + taxCents
+
   if (cartList.length > 0) {
     cartList.forEach((item) => {
       const listItem = document.createElement('div')
@@ -61,21 +70,21 @@ async function renderShoppingCart () {
                     <small class="text-muted">S$ ${ (item.priceCents / 100).toFixed(2)}</small>
                 </p>
                 <div class="quantity">
-                    <span id="delete-cart-item">
+                    <span id="delete-cart">
                         <i class="fa-regular fa-trash-can red"></i>
                     </span>
                     <input disabled="disabled" value="${item.quantity}"/>
-                    <span id="add-cart-item">
+                    <span id="add-cart">
                         <i class="fa-solid fa-plus red"></i>
                     </span>
                 </div>
             </div>
         </div>`
-      listItem.querySelector('#delete-cart-item').addEventListener('click', async () => {
+      listItem.querySelector('#delete-cart').addEventListener('click', async () => {
         await deleteShoppingCart(cartList, item.id)
         renderShoppingCart()
       })
-      listItem.querySelector('#add-cart-item').addEventListener('click', async () => {
+      listItem.querySelector('#add-cart').addEventListener('click', async () => {
         const params = Object.assign(item, {quantity: item.quantity+1})
         await updateShoppingCart(cartList, params)
         renderShoppingCart()
@@ -83,6 +92,8 @@ async function renderShoppingCart () {
       cartListElement.appendChild(listItem);
     })
   }
+  document.querySelector('#subtotal').innerHTML = `S$ ${(subTotalCents/100).toFixed(2)}`
+  document.querySelector('#total').innerHTML = `S$ ${(totalCents/100).toFixed(2)}`
 }
 
 renderMenu()

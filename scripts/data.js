@@ -34,10 +34,21 @@ async function getShoppingCartList() {
 async function createShoppingCart (data) {
   try{
     let cartList = await getShoppingCartList()
+    
     if(cartList.length > 0){
-      cartList.push(data)
-      const params = cartList
-
+      let params
+      const cartListID = cartList.map((x) => x.id)
+      if (cartListID.includes(data.id)) {
+        params = cartList.map((x) => {
+          if (x.id === data.id) {
+            x.quantity = x.quantity + 1
+          }
+          return x
+        })
+      } else {
+        cartList.push(data)
+        params = cartList
+      }
       await axios.put(`${BASE_URL}/b/${SHOPPING_CART_BIN_ID}`, params, {headers: {
         "X-Master-Key": MASTER_KEY,
         "Content-Type": "application/json"

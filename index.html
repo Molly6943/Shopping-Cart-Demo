@@ -10,13 +10,13 @@
             rel="stylesheet"
             integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
             crossorigin="anonymous">
-        <link href="styles/index.css" rel="stylesheet" type="text/css"/>
         <link
             rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
             integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
             crossorigin="anonymous"
             referrerpolicy="no-referrer"/>
+        <link href="styles/index.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
         <header class="header">
@@ -54,28 +54,23 @@
                         <h3>
                             <i class="fa-solid fa-fire orange pe-1"></i>Popular</h3>
                         <p>Most ordered right now.</p>
-                        <section class="menu-list">
-                           
-                        </section>
+                        <section class="menu-list"></section>
                     </section>
                 </section>
                 <section class="shopping-cart">
                     <p class="shopping-cart-title">Your order from Ali's Fry & Grill (Koufu Tanglin Halt)</p>
-                    <section class="cart-list">
-                       
-                    </section>
+                    <section class="cart-list"></section>
                     <section class="payment">
                         <div>
                             <span>Subtotal</span>
-                            <span>S$ 27.53</span>
+                            <span id="subtotal"></span>
                         </div>
                         <div>
                             <span>Delivery fee</span>
-                            <span>S$ 27.53</span>
+                            <span>S$ 4.89</span>
                         </div>
                         <div>
                             <span>Platform fee
-
                                 <a
                                     data-bs-toggle="tooltip"
                                     data-bs-placement="top"
@@ -83,20 +78,18 @@
                                     <i class="fa-regular fa-circle-question"></i>
                                 </a>
                             </span>
-                            <span>S$ 27.53</span>
+                            <span>S$ 0.40</span>
                         </div>
                         <div>
                             <p>Total
                                 <span class="small-text">(incl. GST where applicable)</span>
                             </p>
-                            <span>S$ 27.53</span>
+                            <span id="total"></span>
                         </div>
                         <button type="button" class="payment-button">Review payment and address</button>
-
                     </section>
                 </section>
             </section>
-
         </main>
         <script
             src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
@@ -112,7 +105,6 @@
         </script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.5.1/axios.min.js" integrity="sha512-emSwuKiMyYedRwflbZB2ghzX8Cw8fmNVgZ6yQNNXXagFzFOaQmbvQ1vmDkddHjm5AITcBIZfC7k4ShQSjgPAmQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script src="./scripts/data.js"></script>
-        <script src="./scripts/script.js
-            "></script>
+        <script src="./scripts/script.js"></script>
     </body>
 </html>
