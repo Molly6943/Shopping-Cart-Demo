@@ -78,11 +78,20 @@ async function updateShoppingCart (cartList, data) {
 }
 
 
-async function deleteShoppingCart(cartList, id) {
-  console.log('cartList, id', cartList, id)
+async function deleteShoppingCart(cartList, id, key) {
   try{
     if (cartList.length > 0) {
-      const params = cartList.filter((x) => x.id !== id)
+      let params
+      if (key === 'delete') {
+        params = cartList.filter((x) => x.id !== id)
+      } else {
+        params = cartList.map((x) => {
+          if (x.quantity > 1 && x.id === id) {
+            x.quantity = x.quantity -1
+          }
+          return x
+        })
+      }
       await axios.put(`${BASE_URL}/b/${SHOPPING_CART_BIN_ID}`, params, {headers: {
         "X-Master-Key": MASTER_KEY,
         "Content-Type": "application/json"

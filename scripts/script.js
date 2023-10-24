@@ -67,21 +67,22 @@ async function renderShoppingCart () {
         <div>
             <div>
                 <p>
-                    <small class="text-muted">S$ ${ (item.priceCents / 100).toFixed(2)}</small>
+                  <small class="text-muted">S$ ${ (item.priceCents / 100).toFixed(2)}</small>
                 </p>
                 <div class="quantity">
-                    <span id="delete-cart">
-                        <i class="fa-regular fa-trash-can red"></i>
-                    </span>
+                  <span id="delete-cart">
+                    ${item.quantity > 1 ? `<i class="fa-solid fa-minus red"></i>`: `<i class="fa-regular fa-trash-can red"></i>`}
+                  </span>
                     <input disabled="disabled" value="${item.quantity}"/>
                     <span id="add-cart">
-                        <i class="fa-solid fa-plus red"></i>
+                      <i class="fa-solid fa-plus red"></i>
                     </span>
                 </div>
             </div>
         </div>`
       listItem.querySelector('#delete-cart').addEventListener('click', async () => {
-        await deleteShoppingCart(cartList, item.id)
+        const key = item.quantity > 1 ? 'updateQuantity' : 'delete'
+        await deleteShoppingCart(cartList, item.id, key)
         renderShoppingCart()
       })
       listItem.querySelector('#add-cart').addEventListener('click', async () => {
@@ -95,6 +96,10 @@ async function renderShoppingCart () {
   document.querySelector('#subtotal').innerHTML = `S$ ${(subTotalCents/100).toFixed(2)}`
   document.querySelector('#total').innerHTML = `S$ ${(totalCents/100).toFixed(2)}`
 }
+
+document.querySelector('#payment').addEventListener('click', () => {
+  alert('Your order has been successfully placed!')
+})
 
 renderMenu()
 
