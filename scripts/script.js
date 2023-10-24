@@ -44,7 +44,6 @@ async function renderMenu() {
 }
 
 async function renderShoppingCart () {
-
   const cartListElement = document.querySelector('.cart-list')
   cartListElement.innerHTML = ""
   const cartList = await getShoppingCartList()
@@ -80,6 +79,14 @@ async function renderShoppingCart () {
                 </div>
             </div>
         </div>`
+      listItem.addEventListener('mouseover', () =>{
+        const quantityElement = listItem.querySelector('.quantity')
+        quantityElement.classList = 'quantity quantity-mouseover'
+      })
+      listItem.addEventListener('mouseout', () =>{
+        const quantityElement = listItem.querySelector('.quantity')
+        quantityElement.classList = 'quantity'
+      })
       listItem.querySelector('#delete-cart').addEventListener('click', async () => {
         const key = item.quantity > 1 ? 'updateQuantity' : 'delete'
         await deleteShoppingCart(cartList, item.id, key)
@@ -93,6 +100,7 @@ async function renderShoppingCart () {
       cartListElement.appendChild(listItem);
     })
   }
+
   document.querySelector('#subtotal').innerHTML = `S$ ${(subTotalCents/100).toFixed(2)}`
   document.querySelector('#total').innerHTML = `S$ ${(totalCents/100).toFixed(2)}`
 }

@@ -129,12 +129,19 @@
   border: 1px solid transparent;
   background-color: #fad9e7;
 }
+.quantity{
+  padding: 0 5px;
+  border-radius: 4px;
+}
 .quantity >input{
-  width: 60px;
+  width: 50px;
   border: none;
   text-align: center;
   color: #e21b70;
   background-color: white;
+}
+.quantity-mouseover{
+  box-shadow: 0 0.3rem 0.6rem rgba(0,0,0,.15);
 }
 .quantity >input:focus{
   border: 1px solid #e21b70;
@@ -168,4 +175,29 @@
 }
 .small-text{
   font-size: 10px;
+}
+
+@media only screen and (max-width: 600px) {
+  .main-container{
+    flex-direction: column;
+  }
+  .header{
+    box-shadow: none;
+    justify-content: center;
+  }
+  .header > span{
+    display: none;
+  }
+  .header-logo{
+    margin-right: 0px;
+  }
+  .restaurant-desc {
+    flex-wrap: wrap;
+  }
+  .restaurant-desc >div{
+    margin-bottom: 10px;
+  }
+  .main{
+    margin-left: 10px;
+  }
 }
