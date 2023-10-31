@@ -1,7 +1,5 @@
+import {DELEVERY_FEE_CENTS, PLATFORM_FEE_CENTS, TAX_RATE} from './const.js'
 import {getMenu, getShoppingCartList, createShoppingCart, updateShoppingCart, deleteShoppingCart} from './data.js'
-const DELEVERY_FEE_CENTS = 489
-const PLATFORM_FEE_CENTS = 40
-const TAX_RATE = 0.08
 
 async function renderMenu() {
     const menuListElement = document.querySelector('.menu-list')

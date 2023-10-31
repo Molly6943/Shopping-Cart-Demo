@@ -1,11 +1,8 @@
-const MENU_JSON_BIN_ID = '653631d754105e766fc5dfd2'
-const BASE_URL = 'https://api.jsonbin.io/v3'
-const MASTER_KEY = '$2a$10$elUWikH0smucd2oF9jhSWOT4ZDF0eFmGRefbU9kUX1fgIyHoX3IBC'
-const SHOPPING_CART_BIN_ID = '65366c1054105e766fc5f4c4'
-//example url: https://api.jsonbin.io/v3/b/653631d754105e766fc5dfd2
+import {MENU_JSON_BIN_ID, BASE_URL, MASTER_KEY, SHOPPING_CART_BIN_ID} from './const.js'
 
 export async function getMenu () {
   try{
+    //example url: https://api.jsonbin.io/v3/b/653631d754105e766fc5dfd2
     const response = await axios.get(`${BASE_URL}/b/${MENU_JSON_BIN_ID}/latest`, {headers: {
       "X-Master-Key": MASTER_KEY
     }})
