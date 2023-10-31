@@ -4,7 +4,7 @@ const MASTER_KEY = '$2a$10$elUWikH0smucd2oF9jhSWOT4ZDF0eFmGRefbU9kUX1fgIyHoX3IBC
 const SHOPPING_CART_BIN_ID = '65366c1054105e766fc5f4c4'
 //example url: https://api.jsonbin.io/v3/b/653631d754105e766fc5dfd2
 
-async function getMenu () {
+export async function getMenu () {
   try{
     const response = await axios.get(`${BASE_URL}/b/${MENU_JSON_BIN_ID}/latest`, {headers: {
       "X-Master-Key": MASTER_KEY
@@ -15,7 +15,7 @@ async function getMenu () {
   }
 }
 
-async function getShoppingCartList() {
+export async function getShoppingCartList() {
   try{
     const response = await axios.get(`${BASE_URL}/b/${SHOPPING_CART_BIN_ID}/latest`, {headers: {
       "X-Master-Key": MASTER_KEY
@@ -31,7 +31,7 @@ async function getShoppingCartList() {
   }
 }
 
-async function createShoppingCart (data) {
+export async function createShoppingCart (data) {
   try{
     let cartList = await getShoppingCartList()
     
@@ -60,7 +60,7 @@ async function createShoppingCart (data) {
   }
 }
 
-async function updateShoppingCart (cartList, data) {
+export async function updateShoppingCart (cartList, data) {
   try{
     const params = cartList.map((x) => {
       if (x.id === data.id) {
@@ -78,7 +78,7 @@ async function updateShoppingCart (cartList, data) {
 }
 
 
-async function deleteShoppingCart(cartList, id, key) {
+export async function deleteShoppingCart(cartList, id, key) {
   try{
     if (cartList.length > 0) {
       let params
@@ -87,7 +87,7 @@ async function deleteShoppingCart(cartList, id, key) {
       } else {
         params = cartList.map((x) => {
           if (x.quantity > 1 && x.id === id) {
-            x.quantity = x.quantity -1
+            x.quantity = x.quantity - 1
           }
           return x
         })

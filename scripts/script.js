@@ -1,3 +1,4 @@
+import {getMenu, getShoppingCartList, createShoppingCart, updateShoppingCart, deleteShoppingCart} from './data.js'
 const DELEVERY_FEE_CENTS = 489
 const PLATFORM_FEE_CENTS = 40
 const TAX_RATE = 0.08
@@ -47,7 +48,7 @@ async function renderShoppingCart () {
   const cartListElement = document.querySelector('.cart-list')
   cartListElement.innerHTML = ""
   const cartList = await getShoppingCartList()
-  const subTotalCents = cartList.map(x => x.priceCents*x.quantity).reduce((total, currentValue) => total += currentValue)
+  const subTotalCents = cartList.map(x => x.priceCents * x.quantity).reduce((total, currentValue) => total += currentValue)
   const taxCents = subTotalCents * TAX_RATE
   const totalCents = subTotalCents + DELEVERY_FEE_CENTS + PLATFORM_FEE_CENTS + taxCents
 
